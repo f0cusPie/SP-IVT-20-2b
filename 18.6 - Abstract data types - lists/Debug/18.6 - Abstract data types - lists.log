@@ -1,0 +1,6 @@
+﻿  18.6 - Abstract data types - lists.cpp
+  ListInt.cpp
+  ListIterator.cpp
+  Создание кода...
+C:\Users\Pavel\source\repos\Laba 18\18.6 - Abstract data types - lists\ListInt.cpp(65): warning C4715: ListInt::operator[]: значение возвращается не при всех путях выполнения
+  18.6 - Abstract data types - lists.vcxproj -> C:\Users\Pavel\source\repos\Laba 18\18.1 - Incapsulation\Debug\18.6 - Abstract data types - lists.exe
