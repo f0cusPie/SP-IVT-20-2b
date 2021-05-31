@@ -1,4 +1,0 @@
-﻿  18.1 - Incapsulation.cpp
-C:\Users\Pavel\source\repos\Laba 18\18.1 - Incapsulation\18.1 - Incapsulation.cpp(90,43): warning C4244: аргумент: преобразование "int" в "float", возможна потеря данных
-C:\Users\Pavel\source\repos\Laba 18\18.1 - Incapsulation\18.1 - Incapsulation.cpp(129,51): warning C4305: аргумент: усечение из "double" в "float"
-  18.1 - Incapsulation.vcxproj -> C:\Users\Pavel\source\repos\Laba 18\18.1 - Incapsulation\Debug\18.1 - Incapsulation.exe
