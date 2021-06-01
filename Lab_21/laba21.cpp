@@ -1,13 +1,13 @@
-﻿#include <iostream>
+#include <iostream>
 #include <vector>
 #include <windows.h>
 #include <queue>
 #include <algorithm>
 using namespace std;
 int x;
-int len = 6;
-int result[6] = { 1000,1000,1000,1000,1000,1000 };
-bool flag[6] = { false,false,false,false,false,false };
+int len = 7;
+int result[7] = { 1000,1000,1000,1000,1000,1000, 1000 };
+bool flag[7] = { false,false,false,false,false,false, false};
 vector <vector<int>> matrix = {
 
 
