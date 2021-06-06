@@ -1,140 +1,91 @@
 #include <iostream>
-#include <fstream>
-#include <vector>
-#include <string>
-#include "Windows.h"
-
 using namespace std;
 
-struct Hero
-{
-    string FullName;
-    string HeroRole;
-    int BirthYear;
-};
+int arr[10];
+int num;
 
-bool IsOrdered(int first, int second)
-{
-    return first >= second;
+
+void mergeSortRec(int* v, int r) {
+	int p = 1;
+	int k = 1;
+	int i = 0;
+	bool flag = false;
+
+	while (v[i] <= v[i + 1] && i < r - 1) {
+		p++;
+		i++;
+	}
+	if (v[i] > v[i + 1] && i < r - 1) {
+		i++;
+		flag = true;
+		while (v[i] <= v[i + 1] && i < r - 1) {
+			k++;
+			i++;
+		}
+	}
+	num = i + 1;
+	int* a = new int[p];
+	int* b = new int[k];
+
+	for (i = 0; i < p; i++) {
+		a[i] = v[i];
+	}
+
+	int g = 0;
+	if (flag == true) {
+		for (i = p; i < p + k; i++) {
+			b[g] = v[i];
+			g++;
+		}
+	}
+	int j = 0;
+	int l = 0;
+	if (flag == true) {
+		for (i = 0; i < num; i++) {
+			if ((a[l] < b[j] || j >= k) && l < p) {
+				v[i] = a[l];
+				l++;
+			}
+			else
+				if ((a[l] > b[j] || l >= p) && j < k) {
+					v[i] = b[j];
+					j++;
+				}
+				else
+					if (a[l] == b[j] && j < k && l < p) {
+						v[i] = a[l];
+						v[i + 1] = b[j];
+						l++;
+						j++;
+						i++;
+					}
+		}
+	}
+	delete[] a;
+	delete[] b;
 }
 
-vector<Hero> Merge(vector<Hero>& first, vector<Hero>& second)
-{
-    vector<Hero> buffer;
-    int
-        firstPonter = 0,
-        secondPointer = 0;
-
-    while (firstPonter < first.size())
-    {
-        if (first[firstPonter].BirthYear < second[secondPointer].BirthYear)
-        {
-            buffer.push_back(first[firstPonter]);
-            firstPonter++;
-        }
-        else
-        {
-            buffer.push_back(second[secondPointer]);
-            secondPointer++;
-        }
-    }  
-
-    return buffer;
+void mergeSort1(int* v, int r, int i) {
+	if (i < r) {
+		mergeSortRec(v, r);
+		mergeSort1(v, r, i + 1);
+	}
 }
 
-void MergeSort(vector<Hero>& heros)
-{
-    vector<vector<Hero>> 
-        firstQueue,
-        secondQueue;
-    
-    int 
-        writingIndex = 0,
-        currentRange[] {0, -1};
 
-    do 
-    {
-        int previous = heros[0].BirthYear - 1;
-        for (auto hero : heros)
-        {
-            int current = hero.BirthYear;
-            if (!IsOrdered(current, previous))
-            {
-                writingIndex = (writingIndex == 0)? 1 : 0;
-                currentRange[writingIndex]++;
-            }
-
-            if (writingIndex == 0)
-                firstQueue[currentRange[0]].push_back(hero);
-            else 
-                secondQueue[currentRange[1]].push_back(hero);
-
-            previous = hero.BirthYear;
-        }
-
-        heros.clear();
-        int i = 0;
-        for (i; i < secondQueue.size(); i++)
-        {
-            vector<Hero> buffer = Merge(firstQueue[i], secondQueue[i]);
-            heros.insert(heros.end(), buffer.begin(), buffer.end());
-        }
-        if (firstQueue.size() > secondQueue.size())
-            heros.insert(heros.end(), firstQueue[secondQueue.size()].begin(), firstQueue[secondQueue.size()].end());
-    }
-    while (secondQueue.size() > 0);
-}
-
-void PrintHero(Hero hero, int orderNumber)
-{
-    cout << "Hero #" << orderNumber + 1 << ";\n";
-    cout << " - Full name:  " << hero.FullName << ";\n";
-    cout << " - Hero role:  " << hero.HeroRole << ";\n";
-    cout << " - Birth year: " << hero.BirthYear << ";\n\n";
-}
-
-void PrintHeros(vector<Hero> heros)
-{
-    cout << "Hero count = " << heros.size() << ";\n\n";
-
-    for (int i = 0; i < heros.size(); i++)
-        PrintHero(heros[i], i);
-}
-
-vector<Hero> ReadHeroFromFile(string filePath)
-{
-    vector<Hero> heros;
-    ifstream reader(filePath);
-
-    if (reader.fail())
-        cout << "error" << endl;
-
-    while (!reader.eof())
-    {
-        Hero oneHero;
-        string birthYear;
-
-        getline(reader, oneHero.FullName);
-        getline(reader, oneHero.HeroRole);
-        getline(reader, birthYear);
-        
-        oneHero.BirthYear = stoi(birthYear);
-        heros.push_back(oneHero);
-    }
-
-    return heros;
-}
 
 int main()
 {
-    SetConsoleCP(1251);
-    SetConsoleOutputCP(1251);
+	setlocale(LC_ALL, "rus");
 
-    vector<Hero> heros = ReadHeroFromFile("..\\Work files\\HeroList.txt");
-    PrintHeros(heros);
+	for (int i = 0; i < 10; i++) {
+		cin >> arr[i];
+	}
 
-    MergeSort(heros);
-    PrintHeros(heros);
+	mergeSort1(arr, 10, 0);
 
-    return 0;
+	for (int i = 0; i < 10; i++) {
+		cout << arr[i] << " ";
+	}
+	return 0;
 }
